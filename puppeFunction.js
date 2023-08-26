@@ -75,7 +75,8 @@ async function submit(x, y, signatureText, data) {
   // Click vao submit
   await page.locator('._42ft').click();
 
-  //await browser.close();
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+  await browser.close();
 }
 module.exports = {
   submit,

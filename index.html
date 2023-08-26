@@ -4,12 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AutoType</title>
+  <title>Anh Tuấn</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="main">
-  
   <div class="container">
     <ul class="container__left">
         <li class="name">
@@ -18,7 +17,7 @@
         </li>
         <li class="address-sent-letter">
             <label for="" class="address-sent-letter__label">Địa chỉ gửi thư</label>
-            <input type="text" class="address-sent-letter__input">
+            <textarea class="address-sent-letter__input" name="asl" rows="4" cols="25"></textarea>
         </li>
         <li class="address-mail">
             <label for="" class="address-mail__label">Địa chỉ mail</label>
@@ -30,7 +29,7 @@
         </li>
         <li class="show-url">
             <label for="" class="show-url__label">URL hiện diện</label>
-            <input type="text" class="show-url__input">
+            <textarea class="show-url__input" name="su" rows="4" cols="25"></textarea>
         </li>
         <li class="branch">
             <label for="" class="branch__label">Nhãn hiệu</label>
@@ -301,32 +300,35 @@
 
         <li class="trademark-register">
             <label for="" class="trademark-register__label">Sổ đăng ký nhãn hiệu</label>
-            <input type="text" class="trademark-register__input">
+            <textarea class="trademark-register__input" name="tr" rows="4" cols="25"></textarea>
         </li>
 
         <li class="provide-url">
             <label for="" class="provide-url__label">Cung cấp URL</label>
-            <input type="text" class="provide-url__input">
+            <textarea class="provide-url__input" name="pu" rows="4" cols="25"></textarea>
         </li>
 
         <li class="provide-infor">
             <label for="" class="provide-infor__label">Cung cấp thêm thông tin</label>
-            <input type="text" class="provide-infor__input">
+            <textarea class="provide-infor__input" name="pi" rows="4" cols="25"></textarea>
         </li>
 
         <li class="electronic_signature">
             <label for="" class="electronic_signature__label">Chữ ký điện tử</label>
-            <input type="text" class="electronic_signature__input" placeholder="1|2|3|4|5">
-        </li>
-        <li class="button">
-            <button class="runButton">Start</button>
-        </li>
+            <input type="text" class="electronic_signature__input" placeholder="1|2|3|4|5|6|7|8">
+        </li>  
   </ul>
   </div>
-  
+  <div class="load">
+    <textarea class="result" name="rs" rows="4" cols="25"></textarea>
+    <div class="btn">
+     <button class="start runButton">Start</button>
+     <button class="clear runButton">Clear</button>
+    </div>
+  </div>
     
 </div>
-  <script src="main.js"></script>
+  <!-- <script src="main.js"></script> -->
   <script src="test.js"></script>
 </body>
 </html>

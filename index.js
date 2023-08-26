@@ -6,6 +6,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const port = 3000;
+const date = require('./date.js');
 
 // Đặt cấu hình cho CORS
 app.use((req, res, next) => {
@@ -18,19 +19,18 @@ app.use((req, res, next) => {
 });
 
 app.post('/run-puppeteer', async (req, res) => {
-  const data = req.body.data;
-  const promises = [
-    submit(0, 0, data.arraySignature[0], data),
-    submit(500, 0, data.arraySignature[1], data),
-    submit(1000, 0, data.arraySignature[2], data),
-    submit(1500, 0, data.arraySignature[3], data),
-    submit(0, 515, data.arraySignature[4], data),
-  ];
-  await Promise.all(promises);
-  res.send('Puppeteer process completed.');
+  try {
+    const data = req.body.data;
+    const position = req.body.position;
+    const signature = req.body.signature;
+    await submit(position.x, position.y, signature, data);
+    res.send({
+      message: `==> ${date()} Cửa sổ thứ ${position.index} hoàn thành.\n`,
+    });
+  } catch (e) {
+    res.send({
+      message: `==> ${date()} Cửa sổ thứ ${position.index} không hoàn thành.\n`,
+    });
+  }
 });
-
-app.listen(3000, () => {
-  console.log('Server is on port 3000 !!!');
-});
-// module.exports = app;
+module.exports = app;
