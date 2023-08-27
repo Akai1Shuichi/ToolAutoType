@@ -20,6 +20,7 @@ async function runPuppeteer(data, position, signature, callback) {
   }
 }
 
+let countryName, arraySignature, selectName, selectInnerName;
 const name = document.querySelector('.name__input');
 const addressSent = document.querySelector('.address-sent-letter__input');
 const addressMail = document.querySelector('.address-mail__input');
@@ -27,7 +28,6 @@ const nameOwn = document.querySelector('.name-own__input');
 const showUrl = document.querySelector('.show-url__input');
 const branch = document.querySelector('.branch__input');
 const country = document.querySelector('.country__select');
-let countryName;
 const trademarkRegister = document.querySelector('.trademark-register__input');
 const provideUrl = document.querySelector('.provide-url__input');
 const provideInfo = document.querySelector('.provide-infor__input');
@@ -37,20 +37,41 @@ const electronicSignature = document.querySelector(
 const result = document.querySelector('.result');
 const clear = document.querySelector('.clear');
 const start = document.querySelector('.start');
-let arraySignature;
+const select = document.querySelector('.select__link');
+// const apiKey = document.querySelector('.api_key');
+
+selectName = select.options[0].value;
+selectInnerName = select.options[0].innerText;
 
 country.addEventListener('change', () => {
   const index = country.selectedIndex;
   countryName = country.options[index].innerText;
 });
 
+select.addEventListener('change', () => {
+  const index = select.selectedIndex;
+  selectName = select.options[index].value;
+  selectInnerName = select.options[index].innerText;
+});
+
 start.addEventListener('click', async () => {
   arraySignature = electronicSignature.value.split('|');
+
   if (arraySignature.length !== 0) {
     start.classList.add('disabled');
     start.disabled = true;
-    result.value += '==> Bắt đầu spam!!!\n';
+    result.value += '==> Bắt đầu spam !!!\n';
+    if (selectInnerName === 'Nhãn Hiệu') {
+      result.value += '==> Link Nhãn Hiệu :\n';
+      selectInnerName = '1';
+    } else {
+      result.value += '==> Link Hàng Giả :\n';
+      selectInnerName = '2';
+    }
     data = {
+      // apiKey: apiKey.value,
+      selectInnerName,
+      selectName,
       name: name.value,
       addressSent: addressSent.value,
       addressMail: addressMail.value,
@@ -62,6 +83,7 @@ start.addEventListener('click', async () => {
       provideUrl: provideUrl.value,
       provideInfo: provideInfo.value,
     };
+
     const PositionWindow = [
       { index: 1, x: 0, y: 0 },
       { index: 2, x: 500, y: 0 },
@@ -71,6 +93,8 @@ start.addEventListener('click', async () => {
       { index: 6, x: 500, y: 515 },
       { index: 7, x: 1000, y: 515 },
       { index: 8, x: 1500, y: 515 },
+      { index: 9, x: 0, y: 0 },
+      { index: 10, x: 500, y: 0 },
     ];
 
     const promise = [];
@@ -89,6 +113,9 @@ start.addEventListener('click', async () => {
 });
 
 clear.addEventListener('click', () => {
+  start.classList.remove('disabled');
+  start.disabled = false;
+
   const inputElements = document.querySelectorAll('input[type="text"]');
 
   inputElements.forEach(function (input) {
@@ -102,4 +129,8 @@ clear.addEventListener('click', () => {
   });
 
   country.selectedIndex = 0;
+
+  const index = select.selectedIndex;
+  selectName = select.options[index].value;
+  selectInnerName = select.options[index].innerText;
 });

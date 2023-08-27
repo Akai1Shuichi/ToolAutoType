@@ -1,6 +1,6 @@
 const { app, Menu, MenuItem, BrowserWindow, clipboard } = require('electron');
 const path = require('path');
-const server = require('./index');
+const { app: server } = require('./index');
 function createWindow() {
   const win = new BrowserWindow({
     width: 800,
@@ -22,12 +22,11 @@ function createWindow() {
   win.loadFile('index.html');
 
   win.webContents.on('context-menu', (e, props) => {
-    console.log(props.x, props.y);
     editMenu.popup(win, props.x, props.y);
   });
   // Khởi chạy child process để chạy server Express
   server.listen(3000, () => {
-    console.log('Server is on port 3000 !!!');
+    console.log(`Server is on port 3000 !!!`);
   });
 }
 

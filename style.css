@@ -9,9 +9,14 @@ html {
 }
 
 .main {
-    margin: 0 15px;
+    margin: 10px 15px 0;
 }
 
+.input_captcha {
+    margin-left: 32px;
+    /* display: inline-block; */
+    display: none;
+}
 
 
 .container {
